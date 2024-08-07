@@ -231,7 +231,7 @@ const CustomActionSelect = <T extends ObjConfigType>({
                         </Button>
                         <Button
                             type='button'
-                            onClick={() => editOption?.[useFieldAs.id] ? setModalOpen(!onhandleUpdate?.(editOption)) : setModalOpen(!onhandleAdd?.({ id: Math.random(), ...editOption }))}
+                            onClick={() => editOption?.[useFieldAs.id] ? setModalOpen(!onhandleUpdate?.(editOption)) : setModalOpen(!onhandleAdd?.(editOption))}
                         >
                             Submit
                         </Button>
