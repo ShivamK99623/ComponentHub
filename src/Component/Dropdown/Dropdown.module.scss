@@ -1,0 +1,191 @@
+.overflow-ellipsis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+.customDropdown {
+  position: relative;
+}
+
+.custom-dropdown-label {
+  display: block;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.custom-dropdown-input-container {
+  width: 100%;
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-radius: 4px;
+  outline: 1px solid var(--border);
+  &:active {
+    outline: 2px solid var(--primary);
+  }
+  &:hover {
+    outline: 2px solid var(--hoverColor);
+  }
+  &:focus-within {
+    outline: 2px solid var(--primary);
+  }
+}
+
+.custom-dropdown-menu {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 2px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.custom-dropdown-input,
+.custom-dropdown-button {
+  padding: 8px;
+  flex: 12;
+  width: 100%;
+  color: var(--text);
+  outline: none;
+  position: relative;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+// .custom-dropdown-input::after{
+  
+//   content: "|";
+//   right: 0;
+//   color: black;
+//   position: absolute;
+//   background: red;
+//   top: 0;
+//   z-index: 1;
+
+// }
+.placeholder-active::placeholder{
+     color: var(--text);
+}
+
+.custom-dropdown-option {
+  display: flex;
+  background: var(--gray);
+  border-radius: 4px;
+  margin: 2px 2px;
+  justify-content: space-between;
+  padding: 8px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  &:hover{
+    background: var(--hoverColor);
+  }
+}
+
+.custom-dropdown-icon-cross,
+.custom-dropdown-icon-arrow {
+  position: relative;
+  padding: 0 3px;
+  color: var(--primary);
+  // top: 50%;
+  max-width: 20px;
+  flex:1;
+  // transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.custom-dropdown-icon-cross {
+  // right: 25px;
+  --tw-text-opacity: 1;
+  color: var(--primary);
+}
+
+
+.custom-dropdown-option-button {
+  flex-grow: 1;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.custom-dropdown-option-actions {
+  display: flex;
+  align-items: center;
+}
+
+.custom-dropdown-delete-button,
+.custom-dropdown-edit-button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.custom-dropdown-add-field {
+  padding: 8px;
+  border-top: 1px solid #ccc;
+  background: none;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+}
+
+.custom-dropdown-add-input {
+  flex-grow: 1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+
+.custom-dropdown-add-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  color: var(--text);
+}
+.custom-dropdown-add-button > svg{
+
+  color: var(--primary);
+}
+
+.custom-dropdown-no-options {
+  padding: 8px;
+  text-align: center;
+  color: var(--text);
+  list-style: none;
+}
+
+.custom-Input-field {
+  border-radius: 4px;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  margin-bottom: 8px;
+}
+.custom-Input-CheckBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  // margin-top: 5px;
+  border-radius: 4px;
+  padding: 8px 0;
+  &>label{
+    margin-bottom: 0 !important;
+    display: inline;
+  }
+}
+

@@ -1,0 +1,39 @@
+{
+  "name": "react-component-hub",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "npm-run-all --parallel watch build",
+    "watch": "rollup -c -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@iconify/react": "^5.0.2",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/jest": "^29.5.12",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "add": "^2.0.6",
+    "node-sass": "^9.0.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.40",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rollup": "^4.19.2",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-watch": "^1.0.4",
+    "typescript": "^5.5.4"
+  },
+  "files": [
+    "dist"
+  ]
+}

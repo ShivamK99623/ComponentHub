@@ -1,0 +1,42 @@
+# Ignore node_modules
+node_modules/
+test-lib/node_modules/
+node_modules
+# Ignore build output
+dist/
+dist
+test-lib/dist/
+
+# Ignore temporary files
+*.log
+*.tmp
+*.temp
+
+# Ignore .DS_Store (for macOS users)
+.DS_Store
+
+# Ignore coverage output
+coverage/
+
+
+# Ignore lock files
+package-lock.json
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+
+# Ignore TypeScript build output
+ComponentHub/tsconfig.tsbuildinfo
+test-lib/tsconfig.tsbuildinfo
+
+# Ignore Rollup cache
+ComponentHub/.rpt2_cache/
+test-lib/.rpt2_cache/
+
+# Ignore miscellaneous
+*.swp
+*.swo
+
+
+ComponentHub/dist

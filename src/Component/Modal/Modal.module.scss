@@ -1,0 +1,83 @@
+.ModalAddField-overlay {
+    position: absolute;
+    z-index: 1300;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+.ModalAddField-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    background-color: var(--hoverColor);
+    box-sizing: border-box;
+}
+
+.ModalAddField-content {
+    overflow-y: auto;
+    position: relative;
+    border-radius: 4px;
+    outline:1px solid var(--border);
+    overflow-x: hidden;
+    max-height: 90vh;
+    height: fit-content;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.ModalHeader-Content {
+    width: 100%;
+    display: flex;
+    font-weight: 600;
+    font-size: 20px;
+    align-items: center;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    box-sizing: border-box;
+    color: var(--text);
+}
+.ModalBody {
+    width: 100%;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    color: var(--text);
+}
+.ModalFooter-Content {
+    width: 100%;
+    display: flex;
+    font-weight: 600;
+    font-size: 20px;
+    align-items: center;
+    justify-content: right;
+    padding: 8px 10px;
+    gap:8px;
+    border-top: 1px solid var(--border);
+    box-sizing: border-box;
+}
+
+
+.xs {
+    width: var(--xs);
+}
+
+.sm {
+    width: var(--sm);
+}
+
+.md {
+    width: var(--md);
+}
+
+.lg {
+    width: var(--lg);
+}

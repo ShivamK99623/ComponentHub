@@ -1,0 +1,63 @@
+.Button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+    min-width: 32px;
+    min-height: 32px;
+    outline: none;
+    border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    // box-sizing: border-box;
+}
+
+.Button-primary {
+    background-color: aqua;
+    color: var(--text-primary);
+    &:hover {
+        background-color: rgb(3, 214, 214);
+    }
+}
+.Button-text {
+    background-color: transparent;
+    outline: 2px solid var(--border);
+    color: var(--text);
+}
+
+
+.Button-secondary {
+    background-color: burlywood;
+    &:hover {
+        background-color: rgb(219, 174, 114);
+    }
+}
+
+
+.Button-error {
+    background-color: red;
+    &:hover{
+        background-color: rgb(224, 0, 0);
+    }
+}
+
+
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    transform: scale(0);
+    animation: ripple 600ms linear;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
