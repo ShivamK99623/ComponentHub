@@ -10,7 +10,7 @@
   },
   "type": "module",
   "types": "dist/index.d.ts",
-  "author": "",
+  "author": "Shivam Kumar",
   "license": "ISC",
   "description": "",
   "devDependencies": {
@@ -33,6 +33,20 @@
     "rollup-plugin-watch": "^1.0.4",
     "typescript": "^5.5.4"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShivamK99623/ComponentHub"
+  },
+  "keywords": [
+    "CustomActionDropdown",
+    "Modal",
+    "Button",
+    "ComponentHub",
+    "react-compo-hub",
+    "react-component-hub",
+    "react-hub",
+    "react-component"
+  ],
   "files": [
     "dist"
   ]
