@@ -93,18 +93,19 @@ export default App;
 ## ScreenShot 
 
 <p align="center">
-![1](https://github.com/user-attachments/assets/2787d320-ea00-45e3-b438-aaccfe2143c2)
-![2](https://github.com/user-attachments/assets/dfc5c06b-8a4c-4aee-9dfe-9e4e06f49496)
-</p>  
-
+  <img src="./readme/assets/1.png" width="350" title="hover text">
+  <img src="./readme/assets/2.png" width="350" alt="accessibility text">
+</p>
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
-<a href="https://linkedin.com/in/https://in.linkedin.com/in/shivam-kumar-react" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://in.linkedin.com/in/shivam-kumar-react" height="30" width="40" /></a>
+<a href="https://in.linkedin.com/in/shivam-kumar-react" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="https://in.linkedin.com/in/shivam-kumar-react" height="30" width="40" /></a>
 </p>
 
 
-
+<p>
+<img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=shivamk99623&show_icons=true&locale=en&layout=compact" alt="shivamk99623" />
+</p>
 
 
 <h3 align="left">Languages and Tools:</h3>
