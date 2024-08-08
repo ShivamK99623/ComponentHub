@@ -70,7 +70,6 @@ const CustomActionSelect = <T extends ObjConfigType>({
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            console.log(modalRef,event)
             if (
                 dropdownRef.current &&
                 !dropdownRef.current.contains(event.target as Node) &&
@@ -246,4 +245,132 @@ const CustomActionSelect = <T extends ObjConfigType>({
 
 let CustomActionDropdown = memo(CustomActionSelect);
 
-export { CustomActionDropdown };
+//////////////////////////////////////////////////////////////////////////////////////
+interface DropProps<T extends ObjConfigType> {
+    onChange?: (value: Option<T> | null) => void | null;
+    value?: Option<T> | null;
+    options?: Array<Option<T>>;
+    className?: string;
+    name?: string;
+    required?: boolean;
+    label?: string;
+    placeholder?: string;
+    disabled?: boolean;
+    isClearable?: boolean;
+}
+
+const Dropdowns = <T extends ObjConfigType>({
+    onChange,
+    value = null,
+    options = [],
+    className = '',
+    name = '',
+    required = false,
+    label,
+    placeholder = "",
+    disabled = false,
+    isClearable = false
+}: DropProps<T>) => {
+    const [open, setOpen] = useState<boolean>(false);
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const dropdownRef = useRef<HTMLDivElement>(null);
+    const optionRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target as Node) &&
+                optionRef.current &&
+                !optionRef?.current.contains(event.target as Node)
+
+            ) {
+                setOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    const toggleDropdown = useCallback(() => setOpen(prevOpen => !prevOpen), []);
+
+    const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(event.target.value), []);
+
+    const placeholderText = value?.label ? String(value.label) : placeholder;
+
+
+    const filteredOptions = Array.isArray(options) ? options?.filter(option => String(option.label)?.toLowerCase().includes(searchTerm.toLowerCase())) : options;
+
+
+
+    return (
+        <div ref={dropdownRef} className={`${style.customDropdown} ${className}`}>
+            {label && (
+                <label className={`${style["custom-dropdown-label"]} ${required ? 'required' : ''}`} htmlFor={name}>
+                    {label}
+                </label>
+            )}
+            <div className={style["custom-dropdown-input-container"]}>
+                <input
+                    type="text"
+                    value={searchTerm}
+                    disabled={disabled}
+                    placeholder={String(placeholderText)}
+                    onChange={handleInputChange}
+                    onClick={() => setOpen(true)}
+                    className={`${style["custom-dropdown-input"]} ${value?.label && style["placeholder-active"]} ${style["overflow-ellipsis"]}`}
+                /> <span style={{ color: "var(--border)" }}>|</span>
+                {isClearable && (
+                    <Icon aria-disabled={!value?.label} onClick={() => { onChange?.(null) }} icon="charm:cross" className={style['custom-dropdown-icon-cross']} />
+                )}
+                <Icon icon={`mingcute:${!open ? "down" : "up"}-line`} className={style['custom-dropdown-icon-arrow']} />
+            </div>
+            {open && (
+                createPortal(
+                    <div ref={optionRef}>
+                        <ul
+                            className={style['custom-dropdown-menu']}
+                            style={{
+                                position: 'absolute',
+                                zIndex: 1300,
+                                top: (dropdownRef?.current?.getBoundingClientRect().bottom ?? 0) + window.scrollY,
+                                left: (dropdownRef?.current?.getBoundingClientRect().left ?? 0) + window.scrollX,
+                                width: dropdownRef?.current?.getBoundingClientRect().width
+                            }}
+                        >
+                            {filteredOptions.length > 0 ? (
+                                filteredOptions.map((option: Option<T>) => (
+                                    <li className={style['custom-dropdown-option']} key={String(option.label)}>
+                                        <button
+                                            type='button'
+                                            name={name}
+                                            className={style['custom-dropdown-option-button'] + " " + style['overflow-ellipsis']}
+                                            onClick={() => {
+                                                onChange?.(option);
+                                                setSearchTerm("");
+                                                toggleDropdown();
+                                            }}
+                                        >
+                                            {String(option.label)}
+                                        </button>
+                                    </li>
+                                ))
+                            ) : (
+                                <li className={style["custom-dropdown-no-options"]}>No options found.</li>
+                            )}
+                        </ul>
+                    </div>
+                    ,
+                    document.body
+                )
+            )}
+        </div>
+    );
+};
+
+let Dropdown = memo(Dropdowns);
+
+export { CustomActionDropdown, Dropdown };

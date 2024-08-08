@@ -24,7 +24,6 @@ const Modal: React.FC<Props> = ({ children, onClose,size="md", open = false }) =
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []); // Added onClose as a dependency
-// console.log(open)
   if (!open) return null; // Return null if the modal is not open
 
   return createPortal(

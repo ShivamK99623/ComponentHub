@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BodyContent, CustomActionDropdown, Modal, FooterContent, Button } from 'react-component-hub';
+import {CustomActionDropdown, Dropdown } from 'react-component-hub';
 import './App.css';
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
 
   const onhandleUpdate = (updatedOption) => {
     try {
-      const updatedOptions = options.map((option) => 
+      const updatedOptions = options.map((option) =>
         option.id === updatedOption.id ? updatedOption : option
       );
       setOptions(updatedOptions);
@@ -43,7 +43,7 @@ function App() {
   };
 
   return (
-    <BodyContent>
+    <>
       <CustomActionDropdown
         options={options}
         value={dvalue}
@@ -60,10 +60,18 @@ function App() {
           { id: 'isActive', type: 'boolean', label: 'Active' },
         ]}
         useFieldAs={{ id: 'id', label: 'label' }}
+        label="Select and edit option "
+        placeholder="Select option"
+      />
+      <Dropdown
+        options={options}
+        value={dvalue}
+        onChange={handleChange}
+        isClearable
         label="Select an option"
         placeholder="Select option"
       />
-    </BodyContent>
+    </>
   );
 }
 

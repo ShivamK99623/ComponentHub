@@ -2,6 +2,7 @@ src
 .babelrc
 rollup.config.js
 test-lib
+readme
 ## node modules folder
 node_modules
 ## git repository related files
