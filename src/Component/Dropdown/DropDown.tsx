@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
+import React, { useState, useEffect, useRef, useCallback, memo, CSSProperties } from 'react';
 import { Icon } from '@iconify/react';
 import style from './Dropdown.module.scss';
 import { Modal, HeaderContent, FooterContent, BodyContent } from '../Modal/Modal';
-import { Button } from '../Button/Button';
+import {Button} from '../Button/Button';
 import { createPortal } from 'react-dom';
 
 type ObjConfigType = Record<string, any>;
@@ -30,12 +30,13 @@ interface Props<T extends ObjConfigType> {
     required?: boolean;
     label?: string;
     placeholder?: string;
+    variant?: "primary" | "secondary" | "error" | "text";
     ObjConfig: Array<{
         id: string;
         type: ConfigType;
         label?: string;
     }>;
-    useFieldAs: { id: ExtractKeys<T>, label: ExtractKeys<T> };
+    // useFieldAs: { id: ExtractKeys<T>, label: ExtractKeys<T> };
     onhandleDelete?: (id: string) => string;
     onhandleAdd?: (field: Option<T>) => boolean;
     onhandleUpdate?: (field: Option<T>) => boolean;
@@ -257,6 +258,8 @@ interface DropProps<T extends ObjConfigType> {
     placeholder?: string;
     disabled?: boolean;
     isClearable?: boolean;
+    styles?: CSSProperties;
+    variant?: 'primary' | 'secondary' | 'error'; // Add variant prop
 }
 
 const Dropdowns = <T extends ObjConfigType>({
@@ -269,7 +272,9 @@ const Dropdowns = <T extends ObjConfigType>({
     label,
     placeholder = "",
     disabled = false,
-    isClearable = false
+    isClearable = false,
+    styles = {},
+    variant = 'primary', // Default variant is primary
 }: DropProps<T>) => {
     const [open, setOpen] = useState<boolean>(false);
     const [searchTerm, setSearchTerm] = useState<string>('');
@@ -283,7 +288,6 @@ const Dropdowns = <T extends ObjConfigType>({
                 !dropdownRef.current.contains(event.target as Node) &&
                 optionRef.current &&
                 !optionRef?.current.contains(event.target as Node)
-
             ) {
                 setOpen(false);
             }
@@ -301,19 +305,18 @@ const Dropdowns = <T extends ObjConfigType>({
 
     const placeholderText = value?.label ? String(value.label) : placeholder;
 
-
     const filteredOptions = Array.isArray(options) ? options?.filter(option => String(option.label)?.toLowerCase().includes(searchTerm.toLowerCase())) : options;
 
-
+    const containerClassName = `${style["custom-dropdown-input-container"]} ${style[variant]} ${className}`;
 
     return (
-        <div ref={dropdownRef} className={`${style.customDropdown} ${className}`}>
+        <div ref={dropdownRef} className={`${style.customDropdown} ${className}`} style={styles}>
             {label && (
                 <label className={`${style["custom-dropdown-label"]} ${required ? 'required' : ''}`} htmlFor={name}>
                     {label}
                 </label>
             )}
-            <div className={style["custom-dropdown-input-container"]}>
+            <div style={{outline:open ? `2px solid var(--${variant})`:""}} className={containerClassName}>
                 <input
                     type="text"
                     value={searchTerm}
@@ -322,7 +325,8 @@ const Dropdowns = <T extends ObjConfigType>({
                     onChange={handleInputChange}
                     onClick={() => setOpen(true)}
                     className={`${style["custom-dropdown-input"]} ${value?.label && style["placeholder-active"]} ${style["overflow-ellipsis"]}`}
-                /> <span style={{ color: "var(--border)" }}>|</span>
+                /> 
+                <span style={{ color: "var(--border)" }}>|</span>
                 {isClearable && (
                     <Icon aria-disabled={!value?.label} onClick={() => { onChange?.(null) }} icon="charm:cross" className={style['custom-dropdown-icon-cross']} />
                 )}
@@ -362,8 +366,7 @@ const Dropdowns = <T extends ObjConfigType>({
                                 <li className={style["custom-dropdown-no-options"]}>No options found.</li>
                             )}
                         </ul>
-                    </div>
-                    ,
+                    </div>,
                     document.body
                 )
             )}
@@ -371,6 +374,125 @@ const Dropdowns = <T extends ObjConfigType>({
     );
 };
 
+
 let Dropdown = memo(Dropdowns);
 
+
+
+
 export { CustomActionDropdown, Dropdown };
+
+
+
+
+// //////////////////
+// const DropdownsWithLabel = <T extends ObjConfigType>({
+//     onChange,
+//     value = null,
+//     options = [],
+//     className = '',
+//     name = '',
+//     required = false,
+//     label,
+//     placeholder = "",
+//     isClearable = false
+// }: DropProps<T>) => {
+//     const [open, setOpen] = useState<boolean>(false);
+//     const [searchTerm, setSearchTerm] = useState<string>('');
+//     const dropdownRef = useRef<HTMLDivElement>(null);
+//     const optionRef = useRef<HTMLDivElement>(null);
+
+//     useEffect(() => {
+//         const handleClickOutside = (event: MouseEvent) => {
+//             if (
+//                 dropdownRef.current &&
+//                 !dropdownRef.current.contains(event.target as Node) &&
+//                 optionRef.current &&
+//                 !optionRef?.current.contains(event.target as Node)
+
+//             ) {
+//                 setOpen(false);
+//             }
+//         };
+
+//         document.addEventListener("mousedown", handleClickOutside);
+//         return () => {
+//             document.removeEventListener("mousedown", handleClickOutside);
+//         };
+//     }, []);
+
+//     const toggleDropdown = useCallback(() => setOpen(prevOpen => !prevOpen), []);
+
+//     // const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setSearchTerm(event.target.value), []);
+
+//     const placeholderText = value?.label ? String(value.label) : placeholder;
+
+
+//     const filteredOptions = Array.isArray(options) ? options?.filter(option => String(option.label)?.toLowerCase().includes(searchTerm.toLowerCase())) : options;
+
+   
+
+//     return (
+//         <div ref={dropdownRef} className={`${style.customDropdown} ${className}`}>
+//             <div onClick={toggleDropdown} className={`${style["custom-dropdown-input-container"]} ${style["my-4"]}`}>
+//                 <label style={{ color: "var(--text)", margin: "0px 3px", fontSize: "13px" }} className={`${style["custom-dropdown-label"]} ${required ? 'required' : ''}`} htmlFor={name}>
+//                     {label}
+//                 </label>
+//                 <div
+//                     style={{ fontSize: "13px" }}
+//                     className={`${style["custom-dropdown-input"]} ${value?.label && style["placeholder-active"]} ${style["overflow-ellipsis"]}`}
+//                 >
+//                     {placeholderText}
+//                 </div>
+
+//                 <span style={{ color: "var(--border)" }}>|</span>
+//                 {isClearable && (
+//                     <Icon aria-disabled={!value?.label} onClick={() => { onChange?.(null) }} icon="charm:cross" className={style['custom-dropdown-icon-cross']} />
+//                 )}
+//                 <Icon icon={`mingcute:${!open ? "down" : "up"}-line`} className={style['custom-dropdown-icon-arrow']} />
+//             </div>
+//             {open && (
+//                 createPortal(
+//                     <div ref={optionRef}>
+//                         <ul
+//                             className={style['custom-dropdown-menu']}
+//                             style={{
+//                                 position: 'absolute',
+//                                 zIndex: 1300,
+//                                 top: (dropdownRef?.current?.getBoundingClientRect().bottom ?? 0) + window.scrollY,
+//                                 left: (dropdownRef?.current?.getBoundingClientRect().left ?? 0) + window.scrollX,
+//                                 width: dropdownRef?.current?.getBoundingClientRect().width
+//                             }}
+//                         >
+//                             {filteredOptions.length > 0 ? (
+//                                 filteredOptions.map((option: Option<T>) => (
+//                                     <li className={style['custom-dropdown-option']} key={String(option.label)}>
+//                                         <button
+//                                             type='button'
+//                                             name={name}
+//                                             className={style['custom-dropdown-option-button'] + " " + style['overflow-ellipsis']}
+//                                             onClick={() => {
+//                                                 onChange?.(option);
+//                                                 setSearchTerm("");
+//                                                 toggleDropdown();
+//                                             }}
+//                                         >
+//                                             {String(option.label)}
+//                                         </button>
+//                                     </li>
+//                                 ))
+//                             ) : (
+//                                 <li className={style["custom-dropdown-no-options"]}>No options found.</li>
+//                             )}
+//                         </ul>
+//                     </div>
+//                     ,
+//                     document.body
+//                 )
+//             )}
+//         </div>
+//     );
+// };
+
+// let DropdownWithLabel = memo(DropdownsWithLabel);
+

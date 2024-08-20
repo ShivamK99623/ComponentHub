@@ -1,3 +1,6 @@
+.my-4{
+  margin: 4px; 
+}
 .overflow-ellipsis{
   overflow: hidden;
   text-overflow: ellipsis;
@@ -32,6 +35,9 @@
     outline: 2px solid var(--primary);
   }
 }
+
+
+
 
 .custom-dropdown-menu {
   position: absolute;

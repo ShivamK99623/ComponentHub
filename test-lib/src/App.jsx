@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {CustomActionDropdown, Dropdown } from 'react-component-hub';
+import { CustomActionDropdown, Dropdown ,CheckboxSwitch} from 'react-component-hub';
 import './App.css';
 
 function App() {
@@ -68,9 +68,17 @@ function App() {
         value={dvalue}
         onChange={handleChange}
         isClearable
-        label="Select an option"
+        variant='primary'
+        label="Select With Label"
         placeholder="Select option"
       />
+      <></>
+        <CheckboxSwitch
+                checked={true}
+                onChange={()=>{}}
+                label="Toggle Me"
+                id="mySwitch"
+            />
     </>
   );
 }
